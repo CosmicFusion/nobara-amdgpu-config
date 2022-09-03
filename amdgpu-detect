@@ -1,0 +1,34 @@
+#! /bin/bash
+
+if inxi --gpu | grep amdgpu ; then
+    echo "amdgpu detected" && export "AMDGPU_DETECTED"=1	
+else
+    echo "no amdgpu detected on your system"
+fi
+
+if [[ "$AMDGPU_DETECTED" == 1 ]]; then
+	if zenity --question --text="We have detected modern AMD GPU hardware on your system! , would you like to install some additional drivers for extended functionality?"
+	then
+	zenity --warning --text="Some of this software is proprietary! , See:  https://www.amd.com/en/support/eula ."
+	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY sudo su -c \
+	whoami && \
+	mkdir -p  /var/cache/zenity/nobara-amdgpu-config && \ 
+	touch /var/cache/zenity/nobara-amdgpu-config/components && \
+	zenity --list --column Selection --column Distribution FALSE amdamf-runtime-pro FALSE amdvlk-pro FALSE amdvlk-open FALSE amdogl-pro FALSE amdocl-pro --checklist --title='Components selection' --width 420 --height 450 > /var/cache/zenity/nobara-amdgpu-config/components && \
+	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdamf-runtime-pro && export AMF_INSTALL=1  && echo 'amf selected' || echo 'amf not selected' & \
+	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdvlk-pro && export VLKPRO_INSTALL=1 && echo 'vlk-pro selected' || echo 'vlk-pro not selected' & \
+	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdvlk-open && export VLKOPEN_INSTALL=1 && echo 'vlk-open selected' || echo 'vlk-open not selected' & \
+	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdogl-pro && export OGL_INSTALL=1 && echo 'ogl selected' || echo 'ogl not selected' & \
+	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdocl-pro && export OCL_INSTALL=1 && echo 'ocl selected' || echo 'ocl not selected' & \
+	env
+	#git clone https://github.com/CosmicFusion/fedora-amdgpu-pro
+		
+	
+	else 
+	zenity --warning --text="Not installing additional drivers!"
+	fi
+else 
+	echo "ending script!"
+fi	
+	
+
