@@ -19,7 +19,7 @@ if [[ "$AMDGPU_DETECTED" == 1 ]]; then
 	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdvlk-open && export VLKOPEN_INSTALL=1 && echo 'vlk-open selected' || echo 'vlk-open not selected' & \
 	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdogl-pro && export OGL_INSTALL=1 && echo 'ogl selected' || echo 'ogl not selected' & \
 	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdocl-pro && export OCL_INSTALL=1 && echo 'ocl selected' || echo 'ocl not selected' % \
-	#git clone https://github.com/CosmicFusion/fedora-amdgpu-pro
+	git clone https://github.com/CosmicFusion/fedora-amdgpu-pro /var/cache/zenity/nobara-amdgpu-config/fedora-amdgpu-pro
 		
 	
 	else 
