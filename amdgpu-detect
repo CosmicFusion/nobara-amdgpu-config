@@ -12,15 +12,8 @@ if [[ "$AMDGPU_DETECTED" == 1 ]]; then
 	zenity --warning --text="Some of this software is proprietary! , See:  https://www.amd.com/en/support/eula ."
 	touch /tmp/components
 	zenity --list --column Selection --column Distribution FALSE amdamf-runtime-pro FALSE amdvlk-pro FALSE amdvlk-open FALSE amdogl-pro FALSE amdocl-pro --checklist --title='Components selection' --width 420 --height 450 | tee -a /tmp/components
-	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY sudo su root -c \
-	'mkdir -p  /tmp/zenity/nobara-amdgpu-config & \
-	sudo mv /tmp/components /tmp/zenity/nobara-amdgpu-config/ && \
-	cat /tmp/zenity/nobara-amdgpu-config/components | grep amdamf-runtime-pro && export AMF_INSTALL=TRUE  && echo 'amf selected' || echo 'amf not selected' && export AMF_INSTALL=FALSE & \
-	cat /tmp/zenity/nobara-amdgpu-config/components | grep amdvlk-pro && export VLKPRO_INSTALL=TRUE && echo 'vlk-pro selected' || echo 'vlk-pro not selected' && export VLKPRO_INSTALL=FALSE & \
-	cat /tmp/zenity/nobara-amdgpu-config/components | grep amdvlk-open && export VLKOPEN_INSTALL=TRUE && echo 'vlk-open selected' || echo 'vlk-open not selected' && export 	VLKOPEN_INSTALL=FALSE  & \
-	cat /tmp/zenity/nobara-amdgpu-config/components | grep amdogl-pro && export OGL_INSTALL=TRUE && echo 'ogl selected' || echo 'ogl not selected' && export OGL_INSTALL=FALSE & \
-	cat /tmp/zenity/nobara-amdgpu-config/components | grep amdocl-pro && export OCL_INSTALL=TRUE && echo 'ocl selected' || echo 'ocl not selected' && export OCL_INSTALL=FALSE & \
-	git clone https://github.com/CosmicFusion/fedora-amdgpu-pro /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro'
+	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash -c "mkdir -p  /tmp/zenity/nobara-amdgpu-config & sudo mv /tmp/components /tmp/zenity/nobara-amdgpu-config/ && cat /tmp/zenity/nobara-amdgpu-config/components | grep amdamf-runtime-pro && export AMF_INSTALL=TRUE  && echo 'amf selected' || echo 'amf not selected' && export AMF_INSTALL=FALSE & \cat /tmp/zenity/nobara-amdgpu-config/components | grep amdvlk-pro && export VLKPRO_INSTALL=TRUE && echo 'vlk-pro selected' || echo 'vlk-pro not selected' && export VLKPRO_INSTALL=FALSE & cat /tmp/zenity/nobara-amdgpu-config/components | grep amdvlk-open && export VLKOPEN_INSTALL=TRUE && echo 'vlk-open selected' || echo 'vlk-open not selected' && export 	VLKOPEN_INSTALL=FALSE  & cat /tmp/zenity/nobara-amdgpu-config/components | grep amdogl-pro && export OGL_INSTALL=TRUE && echo 'ogl selected' || echo 'ogl not selected' && export OGL_INSTALL=FALSE & cat /tmp/zenity/nobara-amdgpu-config/components | grep amdocl-pro && export OCL_INSTALL=TRUE && echo 'ocl selected' || echo 'ocl not selected' && export OCL_INSTALL=FALSE "
+
 		
 	
 	else 
