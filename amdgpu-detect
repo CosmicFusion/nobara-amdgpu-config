@@ -15,11 +15,11 @@ if [[ "$AMDGPU_DETECTED" == 1 ]]; then
 	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY sudo su root -c \
 	'mkdir -p  /var/cache/zenity/nobara-amdgpu-config & \
 	sudo mv ~/components /var/cache/zenity/nobara-amdgpu-config/ && \
-	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdamf-runtime-pro && export AMF_INSTALL=1  && echo 'amf selected' || echo 'amf not selected' & \
-	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdvlk-pro && export VLKPRO_INSTALL=1 && echo 'vlk-pro selected' || echo 'vlk-pro not selected' & \
-	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdvlk-open && export VLKOPEN_INSTALL=1 && echo 'vlk-open selected' || echo 'vlk-open not selected' & \
-	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdogl-pro && export OGL_INSTALL=1 && echo 'ogl selected' || echo 'ogl not selected' & \
-	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdocl-pro && export OCL_INSTALL=1 && echo 'ocl selected' || echo 'ocl not selected' & \
+	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdamf-runtime-pro && export AMF_INSTALL=TRUE  && echo 'amf selected' || echo 'amf not selected' && export AMF_INSTALL=FALSE & \
+	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdvlk-pro && export VLKPRO_INSTALL=TRUE && echo 'vlk-pro selected' || echo 'vlk-pro not selected' && export VLKPRO_INSTALL=FALSE & \
+	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdvlk-open && export VLKOPEN_INSTALL=TRUE && echo 'vlk-open selected' || echo 'vlk-open not selected' && export 	VLKOPEN_INSTALL=FALSE  & \
+	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdogl-pro && export OGL_INSTALL=TRUE && echo 'ogl selected' || echo 'ogl not selected' && export OGL_INSTALL=FALSE & \
+	cat /var/cache/zenity/nobara-amdgpu-config/components | grep amdocl-pro && export OCL_INSTALL=TRUE && echo 'ocl selected' || echo 'ocl not selected' && export OCL_INSTALL=FALSE & \
 	git clone https://github.com/CosmicFusion/fedora-amdgpu-pro /var/cache/zenity/nobara-amdgpu-config/fedora-amdgpu-pro'
 		
 	
