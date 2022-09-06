@@ -58,10 +58,13 @@ echo "# Building amdogl-pro." ; sleep 2
 ./package-builder.sh amdocl-legacy 64
 ./package-builder.sh amdocl-legacy 32
 fi
-echo "100"
+# Install
+echo "99"
 echo "# Installing." ; sleep 2
 cd packages
 sudo dnf install -y *.rpm || sudo dnf reinstall -y *.rpm 
+# Clean
+sudo rm -r /tmp/zenity/nobara-amdgpu-config
 ) | 
 zenity --progress \
 --title='Install Progress' \
