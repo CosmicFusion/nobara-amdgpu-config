@@ -1,0 +1,13 @@
+#! /bin/bash
+
+if dnf list --installed | grep libdrm-pro ; then
+	if zenity --question --title='Choose what to do' --text='AMDGPU pro has already been installed! , Choose what to do' --ok-label='Remove Componenets' --cancel-label='Add/Update Components'
+	then
+	exec /etc/nobara/scripts/amdgpu-remove.sh
+	else
+	exec /etc/nobara/scripts/amdgpu-modify.sh
+	fi
+else
+	exec /etc/nobara/scripts/amdgpu-modify.sh
+
+fi
