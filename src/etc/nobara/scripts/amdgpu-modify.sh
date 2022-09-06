@@ -46,17 +46,8 @@ if [[ "$AMDGPU_DETECTED" == TRUE ]]; then
 	
 	# Danger SUDO
 	
+	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /etc/nobara/scripts/amdgpu-build.sh
 	
-	# Export user options
-	
-	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY
-	cat /tmp/zenity/nobara-amdgpu-config/components | grep amdamf-runtime-pro && export "AMF_MODIFY"='amdamf-runtime-pro 64' ||  export "AMF_MODIFY"=' ' 
-	cat /tmp/zenity/nobara-amdgpu-config/components | grep amdvlk-pro && export "VLKPRO_MODIFY"='amdvlk-pro 64 amdvlk-pro 32' ||  export "VLKPRO_MODIFY"=' ' 
-	cat /tmp/zenity/nobara-amdgpu-config/components | grep amdvlk-pro-legacy && export "VLKLEGACY_MODIFY"='amdvlk-pro-legacy 64 amdvlk-pro-legacy 32' ||  export "VLKLEGACY_MODIFY"=' ' 
-	cat /tmp/zenity/nobara-amdgpu-config/components | grep amdvlk-open && export "VLKOPEN_MODIFY"='amdvlk 64 amdvlk 32' ||  export "VLKOPEN_MODIFY"=' ' 
-	cat /tmp/zenity/nobara-amdgpu-config/components | grep amdogl-pro && export "OGL_MODIFY"='amdogl-pro 64 amdogl-pro 32' ||  export "OGL_MODIFY"=' ' 
-	cat /tmp/zenity/nobara-amdgpu-config/components | grep amdocl-legacy && export "OCL_MODIFY"='amdocl-legacy 64 amdocl-legacy 32' ||  export "OCL_MODIFY"=' '
-
 	
 	else 
 	zenity --warning --text="Not installing additional drivers!"
@@ -64,3 +55,4 @@ if [[ "$AMDGPU_DETECTED" == TRUE ]]; then
 else 
 	echo "ending script!"
 fi
+
