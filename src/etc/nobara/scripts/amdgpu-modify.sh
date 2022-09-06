@@ -15,9 +15,9 @@ if [[ "$AMDGPU_DETECTED" == TRUE ]]; then
 	then
 	zenity --warning --text="Some of this software is proprietary! , See:  https://www.amd.com/en/support/eula ."
 	
-	# Clean
+	# Clean and make tmp dir
 	
-	rm -r /tmp/zenity/nobara-amdgpu-config
+	rm -r /tmp/zenity/nobara-amdgpu-config/components
 	mkdir -p /tmp/zenity/nobara-amdgpu-config/
 	
 	# Check for current packages
