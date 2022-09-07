@@ -13,7 +13,7 @@ Source0:        %{name}-%{version}-%{release}.x86_64.tar.gz
 BuildRequires:	wget
 
 Requires:      /usr/bin/bash
-Requires:	rpmbuild
+Requires:	/usr/bin/rpmbuild
 Requires:	mock
 Requires:	zenity
 Requires:	inxi
