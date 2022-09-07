@@ -53,6 +53,7 @@ dnf list --installed | grep amdocl-legacy && export "OCL_STATE"=TRUE || export "
 	zenity "$ENT1_0" "$ENT1_1" "$ENT1_2" "$ENT2_0" "$ENT2_1" "$ENT2_2" "$ENT3_0" "$ENT3_1" "$ENT3_2" "$ENT4_0" "$ENT4_1" "$ENT4_2" "$ENT5_0" "$ENT5_1" "$ENT5_2" "$ENT6_0" "$ENT6_1" "$ENT6_2" --list --column Selection --column Package --column Description \
 	--separator=" " --checklist --title='Component install selection' --width 920 --height 450 | tee -a /tmp/zenity/nobara-amdgpu-config/components
 	
+	sed -i "s|amdvlk-open|amdvlk|g"  /tmp/zenity/nobara-amdgpu-config/components
 	export COMPONENTS=$(cat  /tmp/zenity/nobara-amdgpu-config/components) 
 	
 	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash -c "dnf remove "$COMPONENTS" \ 
