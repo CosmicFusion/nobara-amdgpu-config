@@ -32,7 +32,7 @@ if [[ "$AMDGPU_DETECTED" == TRUE ]]; then
 	# Zenity list
 	
 	zenity --list --column Selection --column Package --column Description \
-	"$AMF_STATE" amdamf-runtime-pro 'AMD™ "Advanced Media Framework" can be used for H265/H264 encoding  & decoding' \
+	"$AMF_STATE" amdamf-runtime-pro 'AMD™ "Advanced Media Framework" can be used for H265/H264 encoding & decoding' \
 	"$VLKPRO_STATE" amdvlk-pro 'AMD™ Proprietary Vulkan implementation can be used for HW ray-tracing & and is needed for AMF (this can be invoked by "$ vk_pro" from the amdgpu-vulkan-switcher package) '  \
 	"$VLKLEGACY_STATE" amdvlk-pro-legacy 'AMD™ Pre 21.50 Proprietary Vulkan implementation can be used for HW ray-tracing & and is needed for AMF (this can be invoked by "$ vk_legacy" from the amdgpu-vulkan-switcher package) (only use if the normal amdvlk-pro does not work for you)'  \
 	"$VLKOPEN_STATE" amdvlk-open 'AMD™ 1st party Vulkan implementation (this can be invoked by "$ vk_amdvlk" from the amdgpu-vulkan-switcher package) ' \

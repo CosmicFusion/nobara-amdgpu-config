@@ -15,30 +15,42 @@ dnf list --installed | grep amdogl-pro && export "OGL_STATE"=TRUE || export "OGL
 dnf list --installed | grep amdocl-legacy && export "OCL_STATE"=TRUE || export "OCL_STATE"=FALSE
 
 	if [[ "$AMF_STATE" == TRUE ]]; then
-	export ENT1='"$AMF_STATE" amdamf-runtime-pro 'AMD™ "Advanced Media Framework" can be used for H265/H264 encoding  & decoding''
+	export ENT1_0=$AMF_STATE
+	export ENT1_1=amdamf-runtime-pro
+	export ENT1_2="AMD™ 'Advanced Media Framework' can be used for H265/H264 encoding & decoding"
 	fi
 	#
 	if [[ "$VLKPRO_STATE" == TRUE ]]; then
-	export ENT2='"$VLKPRO_STATE" amdvlk-pro 'AMD™ Proprietary Vulkan implementation can be used for HW ray-tracing & and is needed for AMF '(this can be invoked by "$ vk_pro" from the amdgpu-vulkan-switcher package)'' '
+	export ENT2_0=$VLKPRO_STATE
+	export ENT2_1=amdvlk-pro
+	export ENT2_2="AMD™ Proprietary Vulkan implementation can be used for HW ray-tracing & and is needed for AMF"
 	fi
 	#
 	if [[ "$VLKLEGACY_STATE" == TRUE ]]; then
-	export ENT3=""$VLKLEGACY_STATE" amdvlk-pro-legacy 'AMD™ Pre 21.50 Proprietary Vulkan implementation can be used for HW ray-tracing & and is needed for AMF '(this can be invoked by "$ vk_legacy" from the amdgpu-vulkan-switcher package) (only use if the normal amdvlk-pro does not work for you)''"
+	export ENT3_0="$VLKLEGACY_STATE"
+	export ENT3_1='amdvlk-pro-legacy'
+	export ENT3_2="AMD™ Pre 21.50 Proprietary Vulkan implementation can be used for HW ray-tracing & and is needed for AMF"
 	fi
 	#
 	if [[ "$VLKOPEN_STATE" == TRUE ]]; then
-	export  ENT4=""$VLKOPEN_STATE" amdvlk-open 'AMD™ 1st party Vulkan implementation '(this can be invoked by "$ vk_amdvlk" from the amdgpu-vulkan-switcher package)''"
+	export  ENT4_0="$VLKOPEN_STATE"
+	export  ENT4_1='amdvlk-open'
+	export  ENT4_2="AMD™ 1st party Vulkan implementation"
 	fi
 	#
 	if [[ "$OGL_STATE" == TRUE ]]; then
-	export  ENT5=""$OGL_STATE" amdogl-pro  'AMD™ Proprietary OpenGL implementation '(this can be invoked by "$ gl_pro" from the amdgpu-opengl-switcher package)''"
+	export  ENT5_0="$OGL_STATE"
+	export  ENT5_1='amdogl-pro'
+	export  ENT5_2="AMD™ Proprietary OpenGL implementation"
 	fi
 	#
 	if [[ "$OCL_STATE" == TRUE ]]; then
-	export  ENT6=""$OCL_STATE" amdocl-legacy  'AMD™ Proprietary OpenCL implementation (this can be invoked by "$ cl_pro" from the amdgpu-opencl-switcher package) (USE ROCM INSTEAD, UNLESS SPECIFICALLY NEEDED!)''"
+	export  ENT6_0="$OCL_STATE"
+	export  ENT6_1='amdocl-legacy'
+	export  ENT6_2="AMD™ Proprietary OpenCL implementation"
 	fi
 	
-	zenity $ENT1 $ENT2 $ENT3 $ENT4 $ENT5 $ENT6 --list --column Selection --column Package --column Description \
+	zenity "$ENT1_0" "$ENT1_1" "$ENT1_2" "$ENT2_0" "$ENT2_1" "$ENT2_2" "$ENT3_0" "$ENT3_1" "$ENT3_2" "$ENT4_0" "$ENT4_1" "$ENT4_2" "$ENT5_0" "$ENT5_1" "$ENT5_2" "$ENT6_0" "$ENT6_1" "$ENT6_2" --list --column Selection --column Package --column Description \
 	--separator=" " --checklist --title='Component install selection' --width 920 --height 450 | tee -a /tmp/zenity/nobara-amdgpu-config/components
 	
 	export COMPONENTS=$(cat  /tmp/zenity/nobara-amdgpu-config/components) 
