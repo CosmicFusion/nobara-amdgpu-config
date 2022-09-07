@@ -38,21 +38,21 @@ echo "# Building amdvlk." ; sleep 2
 /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdvlk 32
 fi
 # build amdvlk-pro-legacy
-if [[ "VLKLEGACY_MODIFY" == TRUE ]]; then
+if [[ "$VLKLEGACY_MODIFY" == TRUE ]]; then
 echo "50"
 echo "# Building amdvlk-pro-legacy." ; sleep 2
 /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdvlk-pro-legacy 64
 /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdvlk-pro-legacy 32
 fi
 # build amdogl-pro
-if [[ "OGL_MODIFY" == TRUE ]]; then
+if [[ "$OGL_MODIFY" == TRUE ]]; then
 echo "75"
 echo "# Building amdogl-pro." ; sleep 2
 /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdogl-pro 64
 /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdogl-pro 32
 fi
 # build amdocl-legacy
-if [[ "OCL_MODIFY" == TRUE ]]; then
+if [[ "$OCL_MODIFY" == TRUE ]]; then
 echo "90"
 echo "# Building amdogl-pro." ; sleep 2
 /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdocl-legacy 64
@@ -64,6 +64,8 @@ echo "# Installing." ; sleep 2
 cd packages
 sudo dnf install -y /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/*.rpm || sudo dnf reinstall -y /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/*.rpm 
 # Clean
+echo "100"
+echo "# Cleaning." ; sleep 2
 sudo rm -r /tmp/zenity/nobara-amdgpu-config
 ) | 
 zenity --progress \
