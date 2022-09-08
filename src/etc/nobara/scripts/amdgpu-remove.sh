@@ -54,7 +54,7 @@ dnf list --installed | grep amdocl-legacy && export "OCL_STATE"=TRUE || export "
 	--separator=" " --checklist --title='Component removal selection' --width 600 --height 450 | tee -a /tmp/zenity/nobara-amdgpu-config/components
 	
 	sed -i "s|amdvlk-open|amdvlk|g"  /tmp/zenity/nobara-amdgpu-config/components
+	export COMPONENTS=$(cat  /tmp/zenity/nobara-amdgpu-config/components) 
 	
-	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash -c "dnf remove -y $(cat  /tmp/zenity/nobara-amdgpu-config/components) && rpm -e libdrm-pro.x86_64  & rpm -e libdrm-pro.i686	
-
-sudo rm -r /tmp/zenity/nobara-amdgpu-config
+	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash -c "dnf remove "$COMPONENTS" \ 
+	sudo rm -r /tmp/zenity/nobara-amdgpu-config "
