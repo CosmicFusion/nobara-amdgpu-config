@@ -42,7 +42,7 @@ if [[ "$AMDGPU_DETECTED" == TRUE ]]; then
 	
 	# Warn users about broken packages
 	
-	zenity --warning --text="Do not interrupt this process !"
+	zenity --warning --text="Do not interrupt this process ! , this might take while please be patient !"
 	
 	# Danger SUDO
 	
