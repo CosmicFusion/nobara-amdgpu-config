@@ -28,7 +28,7 @@ fi
 if [[ "$AMF_MODIFY" == TRUE ]]; then
 echo "25"
 echo "# Building amdamf-runtime-pro." ; sleep 2
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdamf-runtime-pro 64
+/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdamf-pro-runtime 64
 fi
 # build amdvlk
 if [[ "$VLKOPEN_MODIFY" == TRUE ]]; then
@@ -54,7 +54,7 @@ fi
 # build amdocl-legacy
 if [[ "$OCL_MODIFY" == TRUE ]]; then
 echo "90"
-echo "# Building amdocl-pro." ; sleep 2
+echo "# Building amdocl-legacy." ; sleep 2
 /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdocl-legacy 64
 /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdocl-legacy 32
 fi
