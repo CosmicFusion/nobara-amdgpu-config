@@ -54,7 +54,7 @@ fi
 # build amdocl-legacy
 if [[ "$OCL_MODIFY" == TRUE ]]; then
 echo "90"
-echo "# Building amdogl-pro." ; sleep 2
+echo "# Building amdocl-pro." ; sleep 2
 /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdocl-legacy 64
 /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdocl-legacy 32
 fi
