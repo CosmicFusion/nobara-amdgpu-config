@@ -17,7 +17,7 @@ if [[ "$AMDGPU_DETECTED" == TRUE ]]; then
 	
 	# Clean and make tmp dir
 	
-	rm -r /tmp/zenity/nobara-amdgpu-config/components
+	rm -r /tmp/zenity/nobara-amdgpu-config
 	mkdir -p /tmp/zenity/nobara-amdgpu-config/
 	
 	# Check for current packages
@@ -42,7 +42,7 @@ if [[ "$AMDGPU_DETECTED" == TRUE ]]; then
 	
 	# Warn users about broken packages
 	
-	zenity --warning --text="Do not interrupt this process !"
+	zenity --warning --text="Do not interrupt this process ! , this might take while please be patient !"
 	
 	# Danger SUDO
 	
