@@ -15,48 +15,48 @@ cd /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro
 # build libdrm-pro
 echo "5"
 echo "# Building libdrm-pro." ; sleep 2
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh libdrm-pro 64
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh libdrm-pro 32
+/etc/nobara/scripts/package-builder.sh libdrm-pro 64
+/etc/nobara/scripts/package-builder.sh libdrm-pro 32
 # build amdvlk-pro
 if [[ "$VLKPRO_MODIFY" == TRUE ]]; then
 echo "10"
 echo "# Building amdvlk-pro." ; sleep 2
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdvlk-pro 64
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdvlk-pro 32
+/etc/nobara/scripts/package-builder.sh amdvlk-pro 64
+/etc/nobara/scripts/package-builder.sh amdvlk-pro 32
 fi
 # build amdamf-runtime-pro
 if [[ "$AMF_MODIFY" == TRUE ]]; then
 echo "25"
 echo "# Building amdamf-runtime-pro." ; sleep 2
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdamf-runtime-pro 64
+/etc/nobara/scripts/package-builder.sh amdamf-runtime-pro 64
 fi
 # build amdvlk
 if [[ "$VLKOPEN_MODIFY" == TRUE ]]; then
 echo "30"
 echo "# Building amdvlk." ; sleep 2
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdvlk 64
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdvlk 32
+/etc/nobara/scripts/package-builder.sh amdvlk 64
+/etc/nobara/scripts/package-builder.sh amdvlk 32
 fi
 # build amdvlk-pro-legacy
 if [[ "$VLKLEGACY_MODIFY" == TRUE ]]; then
 echo "50"
 echo "# Building amdvlk-pro-legacy." ; sleep 2
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdvlk-pro-legacy 64
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdvlk-pro-legacy 32
+/etc/nobara/scripts/package-builder.sh amdvlk-pro-legacy 64
+/etc/nobara/scripts/package-builder.sh amdvlk-pro-legacy 32
 fi
 # build amdogl-pro
 if [[ "$OGL_MODIFY" == TRUE ]]; then
 echo "75"
 echo "# Building amdogl-pro." ; sleep 2
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdogl-pro 64
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdogl-pro 32
+/etc/nobara/scripts/package-builder.sh amdogl-pro 64
+/etc/nobara/scripts/package-builder.sh amdogl-pro 32
 fi
 # build amdocl-legacy
 if [[ "$OCL_MODIFY" == TRUE ]]; then
 echo "90"
 echo "# Building amdogl-pro." ; sleep 2
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdocl-legacy 64
-/tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/package-builder.sh amdocl-legacy 32
+/etc/nobara/scripts/package-builder.sh amdocl-legacy 64
+/etc/nobara/scripts/package-builder.sh amdocl-legacy 32
 fi
 # Install
 echo "99"
