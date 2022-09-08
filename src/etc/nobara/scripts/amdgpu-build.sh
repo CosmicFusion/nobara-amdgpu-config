@@ -67,6 +67,8 @@ sudo dnf install -y /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/*.rpm || 
 echo "100"
 echo "# Cleaning." ; sleep 2
 sudo rm -r /tmp/zenity/nobara-amdgpu-config
+sudo mock -r /etc/mock/fedora-36-x86_64.cfg --scrub=all
+sudo mock -r /etc/mock/fedora-36-i386.cfg --scrub=all
 ) | 
 zenity --progress \
 --title='Install Progress' \

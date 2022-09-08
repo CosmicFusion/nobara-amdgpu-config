@@ -34,16 +34,18 @@ else
 fi
 
 # create a fedora srpm from the spec sheet
-fedpkg --release f36 srpm
+
+rpmbuild -bs --define "_srcrpmdir $(pwd)" --undefine=_disable_source_fetch *.spec
 
 # build the package
 mock -r /etc/mock/fedora-36-$BUILDARCH.cfg --enable-network --rebuild *.src.rpm
 
 # cleanup our source rpm
-rm *.src.rpm
+rm /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/packages/*.src.rpm
 
 # move the package to our main folder
-cd ../../
+cd /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro
+
 if [[ "$BUILDARCH" == "i386" ]]; then
 	sudo mv /var/lib/mock/fedora-36-i686/result/*.rpm  /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/packages/
 else
@@ -56,7 +58,4 @@ rm  /tmp/zenity/nobara-amdgpu-config/fedora-amdgpu-pro/packages/*.src.rpm
 # re-enable selinux if needed
 sudo setenforce 1
 
-# cleanup
-mock -r /etc/mock/fedora-36-x86_64.cfg --scrub=all
-mock -r /etc/mock/fedora-36-i386.cfg --scrub=all
 
