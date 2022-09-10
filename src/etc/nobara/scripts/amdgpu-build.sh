@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/bash
 
 cat /tmp/zenity/nobara-amdgpu-config/components | grep amdamf-pro-runtime && export "AMF_MODIFY"=TRUE && export "VLKPRO_MODIFY"=TRUE ||  export "AMF_MODIFY"=FALSE
 cat /tmp/zenity/nobara-amdgpu-config/components | grep amdvlk-pro && export "VLKPRO_MODIFY"=TRUE ||  export "VLKPRO_MODIFY"=FALSE
@@ -75,5 +75,5 @@ zenity --progress \
 --auto-close \
 --auto-kill
 
-(( $? != 0 )) && zenity --error --text="Failed to instal amdgpu-pro , please try again!."
+(( $? != 0 )) && zenity --error --text="Failed to install amdgpu-pro , please try again!." ||   zenity --info --window-icon='nobara amdgpu installer' --text="Installation Complete!"
        

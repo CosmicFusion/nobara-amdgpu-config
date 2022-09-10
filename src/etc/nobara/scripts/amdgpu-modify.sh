@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/bash
 
 # Detect if an amdgpu is present
 

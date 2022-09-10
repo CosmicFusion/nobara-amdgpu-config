@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/bash
 
 # Clean and make tmp dir
 
@@ -55,4 +55,8 @@ dnf list --installed | grep amdocl-legacy && export "OCL_STATE"=TRUE || export "
 	
 	sed -i "s|amdvlk-open|amdvlk|g"  /tmp/zenity/nobara-amdgpu-config/components
 	
-	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash -c "dnf remove -y $(cat  /tmp/zenity/nobara-amdgpu-config/components) && rpm -e libdrm-pro.x86_64  & rpm -e libdrm-pro.i686	&& sudo rm -r /tmp/zenity/nobara-amdgpu-config"
+	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash -c "dnf remove -y $(cat  /tmp/zenity/nobara-amdgpu-config/components) && sudo rm -r /tmp/zenity/nobara-amdgpu-config"
+	
+	(( $? != 0 )) && zenity --error --text="Failed to install amdgpu-pro , please try again!." ||   zenity --info --window-icon='nobara amdgpu remover' --text="Removal Complete!"
+	
+	 rpm -e libdrm-pro.x86_64  & rpm -e libdrm-pro.i686
