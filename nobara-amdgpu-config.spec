@@ -1,6 +1,6 @@
 Name:          nobara-amdgpu-config
-Version:       1.1
-Release:       beta.1%{?dist}
+Version:       1.2
+Release:       0%{?dist}
 License:       GPLv2
 Group:         System Environment/Libraries
 Summary:       GUI Installer for amdgpu-pro stack in fedora / nobara
