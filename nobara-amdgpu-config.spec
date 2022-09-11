@@ -25,7 +25,7 @@ tar -xf %{SOURCE0}
 mv usr %{buildroot}/
 mv etc %{buildroot}/
 mkdir -p %{buildroot}/usr/share/licenses/nobara-amdgpu-config
-wget https://raw.githubusercontent.com/CosmicFusion/nobara-amdgpu-config/main/LICENSE.md -O %{buildroot}/usr/share/licenses/nobara-amdgpu-config/LICENSE.md 
+wget https://raw.githubusercontent.com/CosmicFusion/nobara-amdgpu-config/main/LICENSE.md -O %{buildroot}/usr/share/licenses/nobara-amdgpu-config/LICENSE 
 
 %description
 GUI Installer for amdgpu-pro stack in fedora / nobara
