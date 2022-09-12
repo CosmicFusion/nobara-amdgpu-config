@@ -7,12 +7,12 @@ mkdir -p /tmp/zenity/nobara-amdgpu-config/
 
 # Check for current packages
 
-dnf list --installed | grep -ow "\bamdamf-pro-runtime\b" && export "AMF_STATE"=TRUE || export "AMF_STATE"=FALSE
-dnf list --installed | grep -ow "\bamdvlk-pro\b" && export "VLKPRO_STATE"=TRUE || export "VLKPRO_STATE"=FALSE
-dnf list --installed | grep -ow "\bamdvlk-pro-legacy\b" && export "VLKLEGACY_STATE"=TRUE || export "VLKLEGACY_STATE"=FALSE
-dnf list --installed | grep -ow "\bamdvlk\b" && export "VLKOPEN_STATE"=TRUE || export "VLKOPEN_STATE"=FALSE
-dnf list --installed | grep -ow "\bamdogl-pro\b" && export "OGL_STATE"=TRUE || export "OGL_STATE"=FALSE
-dnf list --installed | grep -ow "\bamdocl-legacy\b" && export "OCL_STATE"=TRUE || export "OCL_STATE"=FALSE
+rpm -qa | grep amdamf-pro-runtime && export "AMF_STATE"=TRUE || export "AMF_STATE"=FALSE
+rpm -qa | grep amdvlk-pro-2 && export "VLKPRO_STATE"=TRUE || export "VLKPRO_STATE"=FALSE
+rpm -qa | grep amdvlk-pro-legacy && export "VLKLEGACY_STATE"=TRUE || export "VLKLEGACY_STATE"=FALSE
+rpm -qa | grep amdvlk-2 && export "VLKOPEN_STATE"=TRUE || export "VLKOPEN_STATE"=FALSE
+rpm -qa | grep amdogl-pro && export "OGL_STATE"=TRUE || export "OGL_STATE"=FALSE
+rpm -qa | grep amdocl-legacy && export "OCL_STATE"=TRUE || export "OCL_STATE"=FALSE
 
 	if [[ "$AMF_STATE" == TRUE ]]; then
 	export ENT1_0=$AMF_STATE
@@ -53,8 +53,7 @@ dnf list --installed | grep -ow "\bamdocl-legacy\b" && export "OCL_STATE"=TRUE |
 	--list --column Selection --column Package \
 	--separator=" " --checklist --title='Component removal selection' --width 600 --height 450 | tee -a /tmp/zenity/nobara-amdgpu-config/components
 	
-	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash -c "dnf remove -y $(cat  /tmp/zenity/nobara-amdgpu-config/components) && rpm -e libdrm-pro.x86_64 libdrm-pro.i686 && sudo rm -r /tmp/zenity/nobara-amdgpu-config{" 
-	
+	pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash -c "dnf remove -y $(cat  /tmp/zenity/nobara-amdgpu-config/components) && rpm -e libdrm-pro.x86_64 libdrm-pro.i686 && rm -r /tmp/zenity/nobara-amdgpu-config ||  rm -r /tmp/zenity/nobara-amdgpu-config "	
 	(( $? != 0 )) && zenity --error --text="Failed to remove amdgpu-pro , please try again!." ||   zenity --info --window-icon='nobara amdgpu uninstaller' --text="Removal Complete!"
 	
 	 

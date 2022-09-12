@@ -1,11 +1,18 @@
 #!/usr/bin/bash
 
-cat /tmp/zenity/nobara-amdgpu-config/components | grep -ow "amdamf-pro-runtime "  && export "AMF_MODIFY"=TRUE && export "VLKPRO_MODIFY"=TRUE ||  export "AMF_MODIFY"=FALSE
-cat /tmp/zenity/nobara-amdgpu-config/components | grep -ow "amdvlk-pro " && export "VLKPRO_MODIFY"=TRUE ||  export "VLKPRO_MODIFY"=FALSE
-cat /tmp/zenity/nobara-amdgpu-config/components | grep -ow "amdvlk-pro-legacy "  && export "VLKLEGACY_MODIFY"=TRUE ||  export "VLKLEGACY_MODIFY"=FALSE 
-cat /tmp/zenity/nobara-amdgpu-config/components | grep -ow "amdvlk "  && export "VLKOPEN_MODIFY"=TRUE ||  export "VLKOPEN_MODIFY"=FALSE 
-cat /tmp/zenity/nobara-amdgpu-config/components | grep -ow "amdogl-pro "  && export "OGL_MODIFY"=TRUE ||  export "OGL_MODIFY"=FALSE
-cat /tmp/zenity/nobara-amdgpu-config/components | grep -ow "amdocl-legacy " && export "OCL_MODIFY"=TRUE ||  export "OCL_MODIFY"=FALSE
+cat /tmp/zenity/nobara-amdgpu-config/components | grep "'"amdamf-pro-runtime"'"  && export "AMF_MODIFY"=TRUE && export "VLKPRO_MODIFY"=TRUE ||  export "AMF_MODIFY"=FALSE
+
+cat /tmp/zenity/nobara-amdgpu-config/components | grep "'"amdvlk-pro"'" && export "VLKPRO_MODIFY"=TRUE ||  export "VLKPRO_MODIFY"=FALSE
+
+cat /tmp/zenity/nobara-amdgpu-config/components | grep "'"amdvlk-pro-legacy"'"  &&  export "VLKLEGACY_MODIFY"=TRUE ||  export "VLKLEGACY_MODIFY"=FALSE
+
+cat /tmp/zenity/nobara-amdgpu-config/components | grep "'"amdvlk"'"  &&  export "VLKOPEN_MODIFY"=TRUE ||  export "VLKOPEN_MODIFY"=FALSE
+
+cat /tmp/zenity/nobara-amdgpu-config/components | grep "'"amdogl-pro"'"  && export "OGL_MODIFY"=TRUE ||  export "OGL_MODIFY"=FALSE
+
+cat /tmp/zenity/nobara-amdgpu-config/components | grep "'"amdocl-legacy"'" && export "OCL_MODIFY"=TRUE ||  export "OCL_MODIFY"=FALSE
+
+
 
 (
 # clone spec github repo

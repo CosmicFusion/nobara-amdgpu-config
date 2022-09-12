@@ -30,23 +30,25 @@ if [[ "$AMDGPU_DETECTED" == TRUE ]]; then
 	then
 		# Check for current packages
 	
-	dnf list --installed | grep -ow "\bamdamf-pro-runtime\b" && export "AMF_STATE"=TRUE || export "AMF_STATE"=FALSE
-	dnf list --installed | grep -ow "\bamdvlk-pro\b" && export "VLKPRO_STATE"=TRUE || export "VLKPRO_STATE"=FALSE
-	dnf list --installed | grep -ow "\bamdvlk-pro-legacy\b" && export "VLKLEGACY_STATE"=TRUE || export "VLKLEGACY_STATE"=FALSE
-	dnf list --installed | grep -ow "\bamdvlk\b" && export "VLKOPEN_STATE"=TRUE || export "VLKOPEN_STATE"=FALSE
-	dnf list --installed | grep -ow "\bamdogl-pro\b" && export "OGL_STATE"=TRUE || export "OGL_STATE"=FALSE
-	dnf list --installed | grep -ow "\bamdocl-legacy\b" && export "OCL_STATE"=TRUE || export "OCL_STATE"=FALSE
+	rpm -qa | grep amdamf-pro-runtime && export "AMF_STATE"=TRUE || export "AMF_STATE"=FALSE
+	rpm -qa | grep amdvlk-pro-2 && export "VLKPRO_STATE"=TRUE || export "VLKPRO_STATE"=FALSE
+	rpm -qa | grep amdvlk-pro-legacy && export "VLKLEGACY_STATE"=TRUE || export "VLKLEGACY_STATE"=FALSE
+	rpm -qa | grep amdvlk-2 && export "VLKOPEN_STATE"=TRUE || export "VLKOPEN_STATE"=FALSE
+	rpm -qa | grep amdogl-pro && export "OGL_STATE"=TRUE || export "OGL_STATE"=FALSE
+	rpm -qa | grep amdocl-legacy && export "OCL_STATE"=TRUE || export "OCL_STATE"=FALSE
 	
 	# Zenity list
 	
-	zenity --list --column Selection --column Package --column Description \
+	export COMP_SEC=$(zenity --list --column Selection --column Package --column Description \
 	"$AMF_STATE" amdamf-pro-runtime 'AMD™ "Advanced Media Framework" can be used for H265/H264 encoding & decoding' \
 	"$VLKPRO_STATE" amdvlk-pro 'AMD™ Proprietary Vulkan implementation can be used for HW ray-tracing & and is needed for AMF (this can be invoked by "$ vk_pro" from the amdgpu-vulkan-switcher package) '  \
 	"$VLKLEGACY_STATE" amdvlk-pro-legacy 'AMD™ Pre 21.50 Proprietary Vulkan implementation can be used for HW ray-tracing & and is needed for AMF (this can be invoked by "$ vk_legacy" from the amdgpu-vulkan-switcher package) (only use if the normal amdvlk-pro does not work for you)'  \
 	"$VLKOPEN_STATE" amdvlk 'AMD™ 1st party Vulkan implementation (this can be invoked by "$ vk_amdvlk" from the amdgpu-vulkan-switcher package) ' \
 	"$OGL_STATE" amdogl-pro  'AMD™ Proprietary OpenGL implementation (this can be invoked by "$ gl_pro" from the amdgpu-opengl-switcher package) ' \
 	"$OCL_STATE" amdocl-legacy  'AMD™ Proprietary OpenCL implementation (this can be invoked by "$ cl_pro" from the amdgpu-opencl-switcher package) (USE ROCM INSTEAD, UNLESS SPECIFICALLY NEEDED!) ' \
-	--separator=" " --checklist --title='Component install selection' --width 920 --height 450 | tee -a /tmp/zenity/nobara-amdgpu-config/components
+	--separator="'" --checklist --title='Component install selection' --width 920 --height 450)
+	
+	echo "'"$COMP_SEC"'" | tee -a /tmp/zenity/nobara-amdgpu-config/components
 	
 		# Warn users about broken packages
 		if [ -s /tmp/zenity/nobara-amdgpu-config/components ]
@@ -57,14 +59,17 @@ if [[ "$AMDGPU_DETECTED" == TRUE ]]; then
 	
 		pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /etc/nobara/scripts/amdgpu-build.sh
 		else
+		rm -r /tmp/zenity/nobara-amdgpu-config
 		echo "Stop installation!" && zenity --warning --text="No drivers selected!" && exit
 		fi
 	else
+	rm -r /tmp/zenity/nobara-amdgpu-config
 	echo "Stop installation!" && zenity --warning --text="Not installing additional drivers!" && exit
 	fi
 	
 	
 	else 
+	rm -r /tmp/zenity/nobara-amdgpu-config
 	zenity --warning --text="Not installing additional drivers!"
 	fi
 else 
