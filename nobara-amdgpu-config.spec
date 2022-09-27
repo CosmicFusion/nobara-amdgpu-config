@@ -1,5 +1,5 @@
 Name:          nobara-amdgpu-config
-Version:       1.2
+Version:       1.3
 Release:       3%{?dist}
 License:       GPLv2
 Group:         System Environment/Libraries
@@ -18,7 +18,6 @@ Requires: fedora-packager
 Requires: rpmdevtools
 Requires:	mock
 Requires:	zenity
-Requires:	inxi
 
 %install
 tar -xf %{SOURCE0}

@@ -2,7 +2,9 @@
 
 # Detect if an amdgpu is present
 
-if inxi --gpu | grep amdgpu ; then
+amdgpu=$(lspci | grep -iE 'VGA|3D' | grep -i amd | cut -d ":" -f 3)
+
+ if [[ ! -z $amdgpu ]]; then
     echo "amdgpu detected" && export "AMDGPU_DETECTED"=TRUE	
 else
     echo "no amdgpu detected on your system"
