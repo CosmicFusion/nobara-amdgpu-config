@@ -32,5 +32,7 @@ GUI Installer for amdgpu-pro stack in fedora / nobara
 %attr(0755, root, root) "/etc/nobara/scripts/amdgpu-build.sh"
 %attr(0755, root, root) "/etc/nobara/scripts/amdgpu-modify.sh"
 %attr(0755, root, root) "/etc/nobara/scripts/amdgpu-remove.sh"
+%attr(0755, root, root) "/etc/nobara/scripts/nobara-amdgpu-config.ui"
+%attr(0644, root, root) "/etc/nobara/scripts/nobara-amdgpu-config.py"
 %attr(0755, root, root) "/usr/bin/nobara-amdgpu-config"
 %attr(0644, root, root) "/usr/share/licenses/nobara-amdgpu-config/LICENSE"

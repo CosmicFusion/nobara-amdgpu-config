@@ -14,18 +14,9 @@ internet_check
 
 if [[ $INTERNET == yes ]]; then
 	if dnf list --installed | grep libdrm-pro ; then
-		zenity --question --title='Choose what to do' --text='AMDGPU pro has already been installed! , Choose what to do' --cancel-label='Remove Componenets' --ok-label='Add/Update Components'
-		export OUT_RETURN=$?
-		if [[ $OUT_RETURN == 0 ]]; then
-			/etc/nobara/scripts/amdgpu-modify.sh
-		fi
-		
-		if [[ $OUT_RETURN == 1 ]]; then
-			/etc/nobara/scripts/amdgpu-remove.sh
-		fi
+		python3 /etc/nobara/scripts/nobara-amdgpu-config.py
 	else
 		exec /etc/nobara/scripts/amdgpu-modify.sh
-
 	fi
 else
 	zenity --error --title='Failed!' --text='No Internet Connection!'
