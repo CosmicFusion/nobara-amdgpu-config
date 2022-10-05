@@ -6,6 +6,8 @@ run_func() {
 	rm -r /tmp/zenity/nobara-amdgpu-config/components
 	mkdir -p /tmp/zenity/nobara-amdgpu-config/
 	
+	export CMD1_RETURN=1
+	
 	# Check for current packages
 
 	rpm -qa | grep amdamf-pro-runtime && export "AMF_STATE"=TRUE || export "AMF_STATE"=FALSE
@@ -45,6 +47,7 @@ run_func() {
 		export  ENT6_1=amdocl-legacy
 		fi
 	
+	CMD1() { 
 		zenity $( (( "$AMF_STATE" == TRUE )) && echo " "$ENT1_0" "$ENT1_1" " ) \
 		$( (( "$VLKPRO_STATE" == TRUE )) && echo " "$ENT2_0" "$ENT2_1" " ) \
 		$( (( "$VLKLEGACY_STATE" == TRUE )) && echo " "$ENT3_0" "$ENT3_1" " ) \
@@ -52,12 +55,21 @@ run_func() {
 		$( (( "$OGL_STATE" == TRUE )) && echo " "$ENT5_0" "$ENT5_1" " ) \
 		$( (( "$OCL_STATE" == TRUE )) && echo " "$ENT6_0" "$ENT6_1"  " ) \
 		--list --column Selection --column Package \
-		--separator=" " --checklist --title='Component removal selection' --width 600 --height 450 | tee -a /tmp/zenity/nobara-amdgpu-config/components
-		
-		pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash -c "dnf remove -y $(cat  /tmp/zenity/nobara-amdgpu-config/components) && rpm -e libdrm-pro.x86_64 libdrm-pro.i686 && rm -r /tmp/zenity/nobara-amdgpu-config ||  rm -r /tmp/zenity/nobara-amdgpu-config "	
-		(( $? != 0 )) && zenity --error --text="Failed to remove amdgpu-pro , please try again!." ||   zenity --info --window-icon='nobara amdgpu uninstaller' --text="Removal Complete!"
+		--separator=" " --checklist --title='Component removal selection' --width 600 --height 450  | tee -a /tmp/zenity/nobara-amdgpu-config/components
+	}
+	
+	CMD1
+	
+	if [ -s /tmp/zenity/nobara-amdgpu-config/components ] 
+	then
+		export CMD1_RETURN=0
+	fi
+	
+	if [[ "$CMD1_RETURN" == 0 ]]
+	then
+		pkexec env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY bash -c "dnf remove -y $(cat  /tmp/zenity/nobara-amdgpu-config/components) && rpm -e libdrm-pro.x86_64 libdrm-pro.i686 && rm -r /tmp/zenity/nobara-amdgpu-config ||  rm -r /tmp/zenity/nobara-amdgpu-config " && zenity --info --window-icon='nobara amdgpu uninstaller' --text="Removal Complete!"
+	else
+		zenity --error --text="Failed to remove amdgpu-pro , please try again!."
+	fi
 }
-
-if dnf list --installed | grep libdrm-pro ; then
-	run_func
-fi
+run_func
