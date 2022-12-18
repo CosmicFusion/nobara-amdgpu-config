@@ -10,12 +10,12 @@ run_func() {
 	
 	# Check for current packages
 
-	rpm -qa | grep amdamf-pro-runtime && export "AMF_STATE"=TRUE || export "AMF_STATE"=FALSE
-	rpm -qa | grep amdvlk-pro-2 && export "VLKPRO_STATE"=TRUE || export "VLKPRO_STATE"=FALSE
-	rpm -qa | grep amdvlk-pro-legacy && export "VLKLEGACY_STATE"=TRUE || export "VLKLEGACY_STATE"=FALSE
-	rpm -qa | grep amdvlk-2 && export "VLKOPEN_STATE"=TRUE || export "VLKOPEN_STATE"=FALSE
-	rpm -qa | grep amdogl-pro && export "OGL_STATE"=TRUE || export "OGL_STATE"=FALSE
-	rpm -qa | grep amdocl-legacy && export "OCL_STATE"=TRUE || export "OCL_STATE"=FALSE
+	rpm -q amdamf-pro-runtime && export "AMF_STATE"=TRUE || export "AMF_STATE"=FALSE
+	rpm -q amdvlk-pro && export "VLKPRO_STATE"=TRUE || export "VLKPRO_STATE"=FALSE
+	rpm -q amdvlk-pro-legacy && export "VLKLEGACY_STATE"=TRUE || export "VLKLEGACY_STATE"=FALSE
+	rpm -q amdvlk && export "VLKOPEN_STATE"=TRUE || export "VLKOPEN_STATE"=FALSE
+	rpm -q amdogl-pro && export "OGL_STATE"=TRUE || export "OGL_STATE"=FALSE
+	rpm -q amdocl-legacy && export "OCL_STATE"=TRUE || export "OCL_STATE"=FALSE
 	
 		if [[ "$AMF_STATE" == TRUE ]]; then
 		export ENT1_0=$AMF_STATE
